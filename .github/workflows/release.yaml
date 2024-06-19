@@ -30,7 +30,7 @@ jobs:
           pip install -r requirements.txt
       
       - name: SBOM generation
-      - uses: anchore/sbom-action@v0
+        uses: anchore/sbom-action@v0
         with:
           path: ./build/
 
