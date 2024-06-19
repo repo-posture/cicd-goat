@@ -47,7 +47,7 @@ jobs:
           # python setup.py build
 
           echo "Generating SBOM..."
-          syft ./build -o sbom.sbom --format syft-json  # Generate SBOM in syft-json format
+          syft ./build -o sbom.cyclonedx --format cyclonedx-json
 
           echo "metadata_build=true" >> $GITHUB_ENV  # Set build metadata to true
 
