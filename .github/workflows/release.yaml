@@ -1,4 +1,4 @@
-name: Example Pipeline
+name: Compliance Pipeline
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
     branches:
       - main
       - '**/feature/**'  # Include other branches as needed
-      
+
 jobs:
   example-job:
     name: Example Job
@@ -30,7 +30,7 @@ jobs:
           pip install -r requirements.txt
       
       - name: SBOM generation
-      - uses: anchore/sbom-action@v0
+        uses: anchore/sbom-action@v0
         with:
           path: ./build/
 
