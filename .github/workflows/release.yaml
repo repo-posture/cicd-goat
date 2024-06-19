@@ -29,6 +29,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Install Syft
+        run: |
+          echo "Installing Syft..."
+          curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
+
+      - name: Verify Syft installation
+        run: |
+          syft version
+
       - name: Build project and generate SBOM
         run: |
           echo "Building the project..."
@@ -38,7 +47,7 @@ jobs:
           # python setup.py build
 
           echo "Generating SBOM..."
-          syft ./build -o sbom.json
+          syft ./build -o sbom.json  # Generate SBOM
 
           echo "metadata_build=true" >> $GITHUB_ENV  # Set build metadata to true
 
