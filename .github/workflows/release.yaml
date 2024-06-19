@@ -1,4 +1,4 @@
-name: Compliance Feature
+name: Example Pipeline
 
 on:
   push:
@@ -23,6 +23,11 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
     environment: development  # Example environment variable
 
