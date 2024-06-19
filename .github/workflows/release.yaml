@@ -45,7 +45,7 @@ jobs:
           # Or for a Node.js project: npm run build
 
           echo "Generating SBOM..."
-          syft ./build -o sbom.json
+          syft ./build -o sbom.json -f syft-json  # Use the correct flag for format
 
           echo "metadata_build=true" >> $GITHUB_ENV  # Set build metadata to true
 
