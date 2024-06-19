@@ -24,11 +24,6 @@ jobs:
         with:
           python-version: '3.9'
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
     environment: development  # Example environment variable
 
     permissions:  # Token permissions for the job
