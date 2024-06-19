@@ -33,10 +33,7 @@ jobs:
         run: |
           echo "Installing Syft..."
           curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
-
-      - name: Verify Syft installation
-        run: |
-          syft version
+          syft version  # Verify installation
 
       - name: Build project and generate SBOM
         run: |
@@ -47,7 +44,7 @@ jobs:
           # python setup.py build
 
           echo "Generating SBOM..."
-          syft ./build -o sbom.cyclonedx --format cyclonedx-json
+          syft ./build -o sbom.sbom -f syft-json  # Use the correct flag for format
 
           echo "metadata_build=true" >> $GITHUB_ENV  # Set build metadata to true
 
