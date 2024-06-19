@@ -47,7 +47,7 @@ jobs:
           # python setup.py build
 
           echo "Generating SBOM..."
-          syft ./build -o sbom.json  # Generate SBOM
+          syft ./build -o sbom.sbom --format syft-json  # Generate SBOM in syft-json format
 
           echo "metadata_build=true" >> $GITHUB_ENV  # Set build metadata to true
 
@@ -56,7 +56,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: sbom
-          path: sbom.json
+          path: sbom.sbom
 
       - name: Set metadata.build to true
         run: |
