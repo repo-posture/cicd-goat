@@ -1,18 +1,18 @@
-name: Example Pipeline
+name: Compliance Pipeline
 
 on:
   push:
     branches:
       - main
-      - '**/feature/**'  # Optional: Include other branches if necessary
+      - '**/feature/**'
   pull_request:
     branches:
       - main
-      - '**/feature/**'  # Include other branches as needed
-      
+      - '**/feature/**'
+
 jobs:
-  example-job:
-    name: Example Job
+  build-and-sbom:
+    name: Build and Generate SBOM
     runs-on: ubuntu-latest
     
     steps:
@@ -28,18 +28,38 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      
-      - name: SBOM generation
-      - uses: anchore/sbom-action@v0
+
+      - name: Build project and generate SBOM
+        run: |
+          echo "Building the project..."
+          mkdir -p ./build  # Ensure build directory exists
+
+          # Add your build commands here, for example:
+          # python setup.py build
+
+          echo "Generating SBOM..."
+          # Run SBOM generation here
+          syft ./build -o sbom.json
+          
+          echo "Setting build metadata to true"
+          echo "metadata_build=true" >> $GITHUB_ENV
+
+      - name: Upload SBOM artifact
+        if: always()
+        uses: actions/upload-artifact@v3
         with:
-          path: ./build/
+          name: sbom
+          path: sbom.json
 
-    environment: development  # Example environment variable
+    environment: development
 
-    permissions:  # Token permissions for the job
+    metadata: 
+      build: true
+      
+    permissions:
       contents: read
       issues: write
 
-    concurrency:  # Concurrency control
+    concurrency:
       group: example-group
       cancel-in-progress: true
