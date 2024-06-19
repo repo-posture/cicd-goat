@@ -35,16 +35,17 @@ jobs:
           curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
           syft version  # Verify installation
 
-      - name: Build project and generate SBOM
+      - name: Build project
         run: |
           echo "Building the project..."
           mkdir -p ./build  # Ensure build directory exists
 
-          # Add your build commands here, for example:
-          # python setup.py build
+          # Replace this with your actual build command
+          # For example, for a Python project: python setup.py build
+          # Or for a Node.js project: npm run build
 
           echo "Generating SBOM..."
-          syft ./build -o sbom.sbom -f syft-json  # Use the correct flag for format
+          syft ./build -o sbom.json
 
           echo "metadata_build=true" >> $GITHUB_ENV  # Set build metadata to true
 
@@ -53,7 +54,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: sbom
-          path: sbom.sbom
+          path: sbom.json
 
       - name: Set metadata.build to true
         run: |
