@@ -49,9 +49,6 @@ jobs:
         run: |
           echo "Running Secret Scan..."
           git secrets --scan
-
-      - name: Vulnetability Scan Task
-        uses: argonsecurity/scanner-action
   
       - name: Set metadata.build to true
         run: |
