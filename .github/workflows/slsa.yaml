@@ -39,6 +39,37 @@ jobs:
         with:
           message: |
             Thank you!
+      
+      # curl with --insecure flag
+      - name: curl with --insecure flag
+        run: curl --insecure http://www.example.com/
+
+      # wget with --no-check-certificate flag
+      - name: wget with --no-check-certificate flag
+        run: wget --no-check-certificate http://ipv4.download.thinkbroadband.com/10MB.zip
+
+      # curl with -k flag
+      - name: curl with -k flag
+        run: curl -k http://www.example.com/
+
+      # wget with HTTPS
+      - name: wget with HTTPS
+        run: wget https://www.example.com/ --output-document=securefile.txt
+
+      # curl with HTTPS
+      - name: curl with HTTPS
+        run: curl https://www.example.com/ -o securefile.txt
+
+      # Commands using HTTP
+      - name: curl HTTP request
+        run: curl http://www.example.com/
+
+      - name: wget HTTP download
+        run: wget http://ipv4.download.thinkbroadband.com/10MB.zip
+
+      - name: Run curl with --proxy-insecure flag
+        run: |
+          curl --proxy-insecure -x http://proxy.example.com:8080 http://www.example.com/
 
       - uses: docker://gcr.io/cloud-builders/gradle
 
