@@ -60,6 +60,26 @@ jobs:
         with:
           name: sbom
           path: sbom.json
+      
+      # curl in command substitution
+      - name: curl in command substitution
+        run: |
+          CONTENTS=$(curl http://www.example.com/)
+          echo "$CONTENTS"
+
+      # wget in command substitution
+      - name: wget in command substitution
+        run: |
+          CONTENTS=$(wget -qO- https://www.example.com/)
+          echo "$CONTENTS"
+
+      # curl in complex command with piping
+      - name: curl in complex command with piping
+        run: curl https://www.example.com/ | tee outputfile.txt
+
+      # wget in complex command with redirection
+      - name: wget in complex command with redirection
+        run: wget http://ipv4.download.thinkbroadband.com/10MB.zip > downloadedfile.zip
 
       - name: Set metadata.build to true
         run: |
