@@ -1,5 +1,5 @@
 pytest==7.1.2
-requests==2.27.1
+requests==2.34.0.dev1
 flake8==4.0.1
 jenkinsapi==0.3.8
 sanic_routing==0.7.0
